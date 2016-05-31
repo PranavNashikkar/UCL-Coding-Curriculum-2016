@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Processing Physics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sons-of-obsidian"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">Processing Physics</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Basics of Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="intro.html">Introduction and Contents</a></li>
+                    <li><a href="syntax.html">Lesson 1 - Syntax</a></li>
+                    <li><a href="datatypes&variables.html">Lesson 2 - Data Types and Variables</a></li>
+                    <li><a href="operators.html">Lesson 3 - Operators</a></li>
+					<li><a href="arrays.html">Lesson 4 - Arrays</a></li>
+                    <li><a href="methods.html">Lesson 5 - Methods</a></li>
+					<li><a href="selection.html">Lesson 6 - Selection</a></li>
+                    <li><a href="iteration.html">Lesson 7 - Iteration</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Advanced Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="classes&objects.html">Lesson 1 - Classes and Objects</a></li>
+                    <li><a href="inheritance&scope.html">Lesson 2 - Inheritance and Scope</a></li>
+                    <li><a href="interfaces&methodsignatures.html">Lesson 3 - Interfaces and Method Signatures</a></li>
+                </ul>
+            </li>
+            <li><a href="physics.html">The Physics</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Simulation<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="input-draw.html">Task 1 - Input and Drawing</a></li>
+                    <li><a href="gravity-velocity.html">Task 2 - Gravity and Velocity</a></li>
+                    <li><a href="collisions.html">Task 3 - Collisions</a></li>
+                    <li><a href="friction.html">Task 4 - Friction</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="container-fluid">
+            <h3>Fixed Navbar</h3>
+			
+			<h1 class="text-center">7. Iteration</h1><br><br>
+			
+			<p>In <em>some</em> conditions you might want a certain block of code to run <em>many times or a fixed number of times</em> depending on the <em>output</em> from your program. The best way to do this is to implement <strong>iteration</strong>.</p>
+<p>Below is a flowchart that presents iteration visually:</p>
+<p>&nbsp;</p>
+<img src="Images/iteration1.png" width="700">
+<p>This flowchart basically explains that while a certain condition is met, that particular block of code will continue running <em>repeatedly</em> until the condition is <em>no longer met.</em></p>
+			<br>
+			<p>In Java there are three main loop <em>constructs</em> and they are: <strong>FOR, WHILE, </strong>and<strong> DO WHILE.</strong></p>
+			
+			<br><h3 class="text-center">7.1 FOR Loops</h3><br>
+			
+			<p>A FOR loop is a great loop construct to use if you know exactly how many times you need your block of code to run.</p>
+<p><strong>Syntax</strong></p>
+<p>When you declare a FOR loop there are three parts of code that need to be addressed:</p>
+<ul>
+<li><strong>Initialised variable to act as the counter</strong> &ndash; This step occurs <em>only one time</em> but it initialises the main variable that is responsible for <em>how many times</em> the loop will run.</li>
+<li><strong>A boolean condition involving the initialised variable</strong> &ndash; This <em>boolean condition</em> will decide when the loop <em>stops running</em> based on an expression involving the earlier <em>initialised variable</em>.</li>
+<li><strong>An update expression that changes the initialised variable</strong> &ndash; This part of the FOR loop will update the initialised variable so that it potentially gets <em>closer</em> to meeting the <em>boolean condition.</em></li>
+</ul>
+<p>Here is an example of a FOR loop:</p>
+			
+<pre class="prettyprint" lang-java>for(int i=1;i&lt;11;i++){
+System.out.println("This is loop :"+i);
+}</pre>			
+			
+<p>This code shows that the loop is initialised with a variable "i" as 1. It will 
+increment from 1 until the condition is met when it is no longer less than 11, at which point
+the loop will end.</p>
+
+<p>Here is the result of the code:</p>
+<img src="Images/iteration2.png">
+			
+<br><h3 class="text-center">7.2 WHILE Loops</h3><br>	
+
+<p>A WHILE loop is even simpler than a FOR loop. It basically runs as long as a given boolean condition is met.</p>
+<p>Here is an example of a WHILE loop:</p>
+<pre class="prettyprint" lang-java>int counter=1;
+while(counter<11){
+System.out.println("This is loop: "+counter);
+counter++;
+}</pre>	
+<p>Here is the result of the code:</p>
+<img src="Images/iteration2.png">
+
+<p>Though using a different loop construct the WHILE loop can achieve the same output as the
+FOR loop. It just has different syntax.
+			
+<br><br><h3 class="text-center">7.3 DO WHILE Loops</h3><br>
+
+<p>The DO WHILE loop is <em>exactly </em>the same as the WHILE loop except for <em>one</em> thing, it <em>evaluates</em> the <em>boolean condition</em> at the <em>end</em> of the block of code rather than at the <em>beginning</em>. This mean the code will always run<strong> AT LEAST ONCE</strong> before the condition is evaluated.</p>
+<p>Here is an example of a DO WHILE loop:</p>
+<pre class="prettyprint" lang-java>int counter=1;
+do{
+System.out.println("This is loop: "+counter);
+counter++;
+}while(counter<11);</pre>	
+
+<img src="Images/iteration2.png">
+
+<p>The DO WHILE loop also produces the <em>same</em> <em>output</em> but it is <em>highly useful</em> if you <strong>KNOW</strong> that you want the block of code in the loop to run <strong>AT LEAST ONCE.</strong></p>
+
+			
+			
+
+			<br><br><br>
+        </div>
+    </div>
+</div>
+</body>
+</html>

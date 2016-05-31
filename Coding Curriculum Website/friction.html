@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Processing Physics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sons-of-obsidian"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">Processing Physics</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Basics of Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="intro.html">Introduction and Contents</a></li>
+                    <li><a href="syntax.html">Lesson 1 - Syntax</a></li>
+                    <li><a href="datatypes&variables.html">Lesson 2 - Data Types and Variables</a></li>
+                    <li><a href="operators.html">Lesson 3 - Operators</a></li>
+					<li><a href="arrays.html">Lesson 4 - Arrays</a></li>
+                    <li><a href="methods.html">Lesson 5 - Methods</a></li>
+					<li><a href="selection.html">Lesson 6 - Selection</a></li>
+                    <li><a href="iteration.html">Lesson 7 - Iteration</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Advanced Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="classes&objects.html">Lesson 1 - Classes and Objects</a></li>
+                    <li><a href="inheritance&scope.html">Lesson 2 - Inheritance and Scope</a></li>
+                    <li><a href="interfaces&methodsignatures.html">Lesson 3 - Interfaces and Method Signatures</a></li>
+                </ul>
+            </li>
+            <li><a href="physics.html">The Physics</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Simulation<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="input-draw.html">Task 1 - Input and Drawing</a></li>
+                    <li><a href="gravity-velocity.html">Task 2 - Gravity and Velocity</a></li>
+                    <li><a href="collisions.html">Task 3 - Collisions</a></li>
+                    <li><a href="friction.html">Task 4 - Friction</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="container-fluid">
+            <h3>Fixed Navbar</h3>
+
+            <h1 class="text-center">Friction</h1>
+            <h2>
+                <small>Task 4.1</small>
+            </h2>
+            <p>Now onto the final task of friction.
+                At the moment, our square is quite difficult to control, as it never loses its horizontal motion. We can
+                implement a basic version of air resistance in much the same way that we implemented gravity. We want
+                the x velocity to eventually reach 0 if the user doesn’t move the square, so once it gets below a
+                certain threshold we can set it manually to 0. In square object add the following:
+            </p>
+
+    
+
+  <pre class="prettyprint" lang-java> private float airResistanceStrength = 0.025;
+private void updateAirResistance()
+  {
+   if (xVelocity&gt;0)
+   {
+     xVelocity-=airResistanceStrength;
+   }
+   else
+   {
+     xVelocity+=airResistanceStrength;
+   }
+   if (Math.abs(xVelocity) &lt; airResistanceStrength*1.25) //
+   {
+     xVelocity=0;
+   }
+  }</pre>
+
+            <p>The above code slows down the square no matter which horizontal direction it’s travelling in. If it’s
+                speed drops below the strength of the air resistance * 1.25, then it’s stopped entirely (to not do
+                unnecessary work in calculating near invisible air resistances).</p>
+            <h2>
+                <small>Task 4.2</small>
+            </h2>
+            <p>Let’s make a new interface for friction and call it (yep!) Friction. </p>
+      <pre class="prettyprint" lang-java>public interface Friction
+{
+  public float getFrictionCoeff();
+  public void handleFriction();
+}</pre>
+            <p>This interface only needs to let us get access to the coefficient of friction and implement some method
+                to deal with it when two objects are touching. But how do we work out if two objects ARE touching. And
+                which side/orientation they might be touching on. Hmm does this sound familiar? We implemented most of
+                this code for our canCollide class. If the two objects are touching then there’s a (not necessarily
+                fast) collision occurring, so Friction can’t work properly if the two objects can’t collide. Let us
+                inherit the methods from canCollide to ensure that all objects that want to use friction can also
+                collide. Rewrite the above as:</p>
+<pre class="prettyprint" lang-java>public interface Friction extends canCollide
+{
+  public float getFrictionCoeff();
+  public void handleFriction(int direction,Friction b);
+}</pre>
+            <p>Now we implement the friction methods in Platform and SquareObject by adding a private variable of type
+                float frictionCoeff to each, and making a getFrictionCoeff() method for both. However, for the sake of
+                this guide, we will skip using the frictionCoeff for SquareObject, and just use the value from the
+                Platform:</p>
+<pre class="prettyprint" lang-java>  private float frictionCoeff=0.05;
+public float getFrictionCoeff()
+  {
+    return frictionCoeff;
+  }
+  public void handleFriction(int direction,Friction b)
+  {
+  
+  }</pre>
+            <p>We are having an empty function for Platform’s handleFriction similar to what we did for collision
+                detection.
+                If our ‘collision’ happens from above or below, we want to slow down our velocity in the horizontal
+                direction, whereas the opposite is true if it happens from the left or right.
+            </p>
+<pre class="prettyprint" lang-java>public void handleFriction(int direction,Friction b)
+  {
+    if (direction==1 || direction == 3)
+    {
+      horizontalFriction(b.getFrictionCoeff());
+    }
+    else
+    {
+      verticalFriction(b.getFrictionCoeff());
+    }
+  }
+private void horizontalFriction(float frictionCoeff)
+  {
+   if (xVelocity&gt;0)
+   {
+     xVelocity-=frictionCoeff;
+   }
+   else
+   {
+     xVelocity+=frictionCoeff;
+   }
+   if (Math.abs(xVelocity) &lt; frictionCoeff*1.25) //
+   {
+     xVelocity=0;
+   }
+  }
+  private void verticalFriction(float frictionCoeff)
+  {
+   if (yVelocity&gt;0)
+   {
+     yVelocity-=frictionCoeff;
+   }
+   else
+   {
+     yVelocity+=frictionCoeff;
+   }
+    if (Math.abs(yVelocity) &lt; frictionCoeff*1.25) //
+   {
+     yVelocity=0;
+   }
+  }</pre>
+            <p>A little bit messy, but it works. That was the final physics concept that we had to master,
+                congratulations! This might be a lot more interesting with more objects though, let’s add some. </p>
+
+
+            <h2>
+                <small>Extension Tasks:</small>
+            </h2>
+
+            <ul>
+                <li>Try to implement using the friction coefficient for the SquareObject class as well. This will affect
+                    how ‘sticky’ the Square will be on any surface.
+                </li>
+                <li>Load sprites/images in from your hard drive to make the simulation much more appealing. Take a look
+                    at the processing reference library for ideas on how to do this: https://processing.org/reference/
+                </li>
+            </ul>
+
+            <h2>
+                <small>Task 4.3:</small>
+            </h2>
+            <p>Firstly, let’s split all the collision and friction checking code from the controller into a new
+                function:</p>
+  <pre class="prettyprint" lang-java>private void collisionFriction(Friction currentPlatform)
+  {
+    if (collisionDetector.collision(square,currentPlatform))
+    {
+      int direction = collisionDetector.getDirection(square,currentPlatform);
+      square.handleCollide(direction,currentPlatform);
+      square.handleFriction(direction,currentPlatform);
+    }
+  }</pre>
+            <p>Since we only have one square ‘player’ to move around, we won’t pass it as a parameter as it’s already
+                accessible to the controller. Let’s make a list of platforms that might collide and have friction, and
+                call this function on them one at a time: </p>
+  <pre class="prettyprint" lang-java>private ArrayList &lt; Platform &gt;  platformList= new ArrayList &lt; Platform &gt; ();
+private void checkCollisions()
+  {
+    for (int i=0;i &lt; platformList.size();i++)
+    {
+      collisionFriction(platformList.get(i));
+    }
+  }</pre>
+            <p>Similarly, let’s make each platform in the list draw itself automatically as well: </p>
+  <pre class="prettyprint" lang-java>private void drawPlatforms()
+  {
+    for (int i=0;i &lt; platformList.size();i++)
+    {
+      platformList.get(i).draw();
+    }
+  }</pre>
+            <p>Let’s also change where and how the platforms are created. Add the following code to the controller
+                constructor to create some more platforms and add them to the platform list. </p>
+  <pre class="prettyprint" lang-java>public Controller()
+  {
+    inputKey=new InputKey();
+    square = new SquareObject(30,30);
+    platformList.add(new Platform(30,450,0.5));
+    platformList.add(new Platform(30,70,0.2));
+    platformList.add(new Platform(300,350,0.8));
+    platformList.add(new Platform(600,350,2));
+  }</pre>
+            <p>While we’re at it, let’s make the screen size of the program bigger by changing size(500,500) in void
+                setup() to size(1000,700) :</p>
+  <pre class="prettyprint" lang-java>void setup(){
+  size(1000,700);
+  background(255,0,0);
+}</pre>
+            <p>There we have our fully functioning physics simulation. Note: the platform on the far right makes the
+                square bounce much higher than it started at (coefficients of restitution are limited to 1 in the real
+                world, but we can have some fun in our simulation).</p>
+
+            <h2>
+                <small>Visual Changes:</small>
+            </h2>
+            <p>Change the colour from bright red to something a little less hideous, maybe a golden colour:</p>
+            <pre class="prettyprint" lang-java>background(255,215,0);</pre>
+            <p>Change void setup() and controller update() to this new colour to make it stay gold.
+                Let’s also change the colour </p>
+            <pre class="prettyprint" lang-java>fill(137,66,161);</pre>
+            <img src="Images/4_1.png" alt="Picture 4.1">
+            <p>Beautiful!</p>
+            <h2>
+                <small>Extension Tasks:</small>
+            </h2>
+            <ul>
+                <li>Load and save a pre-built platform world from a file.</li>
+                <li>Try changing the way the platform constructor works to take x and y size into account as well as the
+                    coefficient of friction for each platform.
+                </li>
+            </ul>
+            <br><br><br>
+        </div>
+    </div>
+</div>
+</body>
+</html>

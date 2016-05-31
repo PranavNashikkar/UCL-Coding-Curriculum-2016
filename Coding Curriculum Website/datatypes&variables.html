@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Processing Physics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sons-of-obsidian"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">Processing Physics</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Basics of Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="intro.html">Introduction and Contents</a></li>
+                    <li><a href="syntax.html">Lesson 1 - Syntax</a></li>
+                    <li><a href="datatypes&variables.html">Lesson 2 - Data Types and Variables</a></li>
+                    <li><a href="operators.html">Lesson 3 - Operators</a></li>
+					<li><a href="arrays.html">Lesson 4 - Arrays</a></li>
+                    <li><a href="methods.html">Lesson 5 - Methods</a></li>
+					<li><a href="selection.html">Lesson 6 - Selection</a></li>
+                    <li><a href="iteration.html">Lesson 7 - Iteration</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Advanced Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="classes&objects.html">Lesson 1 - Classes and Objects</a></li>
+                    <li><a href="inheritance&scope.html">Lesson 2 - Inheritance and Scope</a></li>
+                    <li><a href="interfaces&methodsignatures.html">Lesson 3 - Interfaces and Method Signatures</a></li>
+                </ul>
+            </li>
+            <li><a href="physics.html">The Physics</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Simulation<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="input-draw.html">Task 1 - Input and Drawing</a></li>
+                    <li><a href="gravity-velocity.html">Task 2 - Gravity and Velocity</a></li>
+                    <li><a href="collisions.html">Task 3 - Collisions</a></li>
+                    <li><a href="friction.html">Task 4 - Friction</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="container-fluid">
+            <h3>Fixed Navbar</h3>
+			
+			<h1 class="text-center">2. Data Types and Variables</h1><br><br>
+			<p>In Java there is something called a <em>variable </em>which is a <em>memory location </em>that stores a <em>value</em>. There are different types of data that can be stored in a variable. These come in two forms, <strong>Primitive Data Types</strong> and <strong>Object Data Types.</strong></p>
+			<br><h3 class="text-center">2.1 Primitive Data Types</h3><br>
+			<p>In Java, there are 8 <em>primitive</em> data types:</p>
+			<ul>
+			<li><p><strong>boolean</strong> &ndash; which stores <strong>1</strong> bit of data. Either <em>true</em> or <em>false</em>.</p>
+			<li><p><strong>char</strong> &ndash; which stores one <strong>16</strong> bit character.</p>
+			<li><p><strong>float</strong> &ndash; which stores a <strong>32</strong> bit real number.</p>
+			<li><p><strong>double</strong> &ndash; which stores a <strong>64</strong> bit real number.</p>
+			<li><p><strong>byte</strong> &ndash; which stores an <strong>8</strong> bit integer.</p>
+			<li><p><strong>short</strong> &ndash; which stores a <strong>16</strong> bit integer.</p>
+			<li><p><strong>int</strong> &ndash; which stores a <strong>32</strong> bit integer.</p>
+			<li><p><strong>long</strong> &ndash; which stores a <strong>64</strong> bit integer.</p>
+			</ul>
+				<br>
+				<p>Variable <em>declaration</em> is when you state the name of the variable along with its data type.</p>
+			<pre class="prettyprint" lang-java>
+boolean boolTest;
+char charTest;
+float floatTest;
+double doubleTest;
+byte byteTest;
+short shortTest;
+int intTest;
+long longTest;</pre>
+<br>
+<p>Variable <em>instantiation</em> is when you state the name, datatype and value to be stored in the variable.</p>
+<pre class="prettyprint" lang-java>
+boolean boolTest=true;
+char charTest='A';
+float floatTest=0.5f;
+double doubleTest=5.234234234d;
+byte byteTest=64;
+short shortTest=3425;
+int intTest=234234;
+long longTest=1231231;</pre>
+<p>Variable <em>literals</em> are variables which are instantiated with a fixed value from the beginning.</p>
+<br><p>The opposite of a variable being instantiated as a literal would be an example such as this:</p>
+<pre class="prettyprint" lang-java>
+int firstInt=64;
+int secondInt=firstInt;</pre>
+<p>This is an example of a variable being instantiated with the value of another variable. The difference is that the value of the first variable can &lsquo;vary&rsquo; <em>before</em> the second is created and so it is a more dynamic method of instantiating variables.</p>
+<pre class="prettyprint" lang-java>
+System.out.println("The value of secondInt is: "+secondInt);</pre>
+
+<p>To confirm it, when printing the value held in the secondInt variable, the result will be the value stored in firstInt:</p>
+<img src="Images/variable1.png"><br><br>
+			
+<h3 class="text-center">2.2 Object Data Types</h3><br>
+<p>There is a data type for a sequence of characters called a String and in Java it is represented as an object.</p>
+<p>String <em>declaration</em></p>
+<pre class="prettyprint" lang-java>String stringTest;</pre>
+<p>String <em>Instantiation </em>with <em>literal</em></p>
+<pre class="prettyprint" lang-java>String stringTest="Hello World!";</pre>
+
+
+<p>As Strings are objects, they are provided with numerous methods that can do really useful things. Here are some examples and their outputs:</p>
+<ul>
+<li><b>length():</b> this method returns the length of the String that is provided as an argument.</li>
+</ul>
+<pre class="prettyprint" lang-java>String stringTest="Hello World!";
+System.out.println(stringTest.length());</pre>
+<div><b>This code returns:</b></div>
+<img src="Images/variable2.png">
+			
+			<br><br>
+			<ul>
+<li><b>equals():</b> this method compares two Strings and identifies if they are the same by returning a boolean value(true or false).</li>
+</ul>
+<pre class="prettyprint" lang-java>String stringTest="Hello ";
+String stringTest2="World!";
+System.out.println(stringTest.equals(stringTest2));</pre>
+<div><b>This code returns:</b></div>
+<img src="Images/variable3.png"><br><br>
+<pre class="prettyprint" lang-java>String stringTest="Hello ";
+String stringTest2="Hello ";
+System.out.println(stringTest.equals(stringTest2));</pre>
+<div><b>This code returns:</b></div>
+<img src="Images/variable4.png"><br><br>
+<ul>
+<li><b>concat():</b> this method takes two Strings and returns a new one with the second String attached to the end of the first String.</li>
+</ul>
+<pre class="prettyprint" lang-java>String stringTest="Hello ";
+String stringTest2="World!";
+System.out.println(stringTest.concat(stringTest2));</pre>
+<div><b>This code returns:</b></div>
+<img src="Images/variable5.png">
+<pre class="prettyprint" lang-java>String stringTest="Hello ";
+String stringTest2="World!";
+System.out.println(stringTest2.concat(stringTest));</pre>
+<div><b>This code returns:</b></div>
+<img src="Images/variable6.png"><br><br>
+
+<br><h3 class="text-center">2.3 Types of variables</h3><br>
+<p><strong>Local variables</strong> &ndash; These are variable that are created <em>inside</em> methods and are removed when the method is exited.</p>
+<pre class="prettyprint" lang-java>public class FirstProgram{
+	public static void main(String args[]){
+		printHelloWorld();
+	}
+	
+	public static void printHelloWorld(){
+		String helloWorld="Hello World!";
+		System.out.println(helloWorld);
+	}
+}</pre>
+
+<p>In method printHelloWorld(), there is a variable created there called helloWorld. This variable disappears after this method is executed and exited.</p>
+<br><p><strong>Instance variable </strong>&ndash; These are variables that are created outside methods but inside a class.</p>
+
+<pre class="prettyprint" lang-java>public class FirstProgram{
+	
+		String helloWorld="Hello World!";
+		
+		public void doSomething(){
+		...
+		}
+}</pre>
+
+<br><p><strong>Static variables </strong>&ndash; These are variables that are similar to instance variables as they are created outside methods. However, there can only be one static variable for a class. This means that no matter the number of objects created, they all share this same static variable. Also they are hardly used except as constants.</p>
+<pre class="prettyprint" lang-java>public class FirstProgram{
+	
+		static int classVariable=123;
+		
+		public void doSomething(){
+		...
+		}
+}</pre>
+
+
+
+
+
+
+
+			<br><br><br>
+        </div>
+    </div>
+</div>
+</body>
+</html>

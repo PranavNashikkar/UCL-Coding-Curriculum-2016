@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Processing Physics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sons-of-obsidian"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">Processing Physics</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Basics of Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="intro.html">Introduction and Contents</a></li>
+                    <li><a href="syntax.html">Lesson 1 - Syntax</a></li>
+                    <li><a href="datatypes&variables.html">Lesson 2 - Data Types and Variables</a></li>
+                    <li><a href="operators.html">Lesson 3 - Operators</a></li>
+					<li><a href="arrays.html">Lesson 4 - Arrays</a></li>
+                    <li><a href="methods.html">Lesson 5 - Methods</a></li>
+					<li><a href="selection.html">Lesson 6 - Selection</a></li>
+                    <li><a href="iteration.html">Lesson 7 - Iteration</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Advanced Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="classes&objects.html">Lesson 1 - Classes and Objects</a></li>
+                    <li><a href="inheritance&scope.html">Lesson 2 - Inheritance and Scope</a></li>
+                    <li><a href="interfaces&methodsignatures.html">Lesson 3 - Interfaces and Method Signatures</a></li>
+                </ul>
+            </li>
+            <li><a href="physics.html">The Physics</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Simulation<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="input-draw.html">Task 1 - Input and Drawing</a></li>
+                    <li><a href="gravity-velocity.html">Task 2 - Gravity and Velocity</a></li>
+                    <li><a href="collisions.html">Task 3 - Collisions</a></li>
+                    <li><a href="friction.html">Task 4 - Friction</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="container-fluid">
+            <h3>Fixed Navbar</h3>
+
+
+            <h1 class="text-center">Basic Collisions</h1>
+            <h2>
+                <small>Task 3.1</small>
+            </h2>
+            <p>Now we have gravity and velocity, but our square keeps trying to leave the window! Let’s try to fix that
+                shall we? We’ll make a small platform for it to land on, so we don’t have to keep pressing ‘w’ to keep
+                it on screen. </p>
+            <p>To check for collisions, we’ll need to know the position and size of every object that we want to check
+                for collisions. But to do this, we need to ensure that the objects we give a collision detection support
+                the methods that we need to access these properties. How do we do this? By using interfaces.</p>
+            <p>Let’s start by declaring a new interface called canCollide. Let’s add the methods which it should
+                guarantee the existence of to it. We will require getX, getY, getWidth, and getHeight. These should all
+                return a float and be public methods. </p>
+
+   
+
+  <pre class="prettyprint" lang-java>
+public interface canCollide
+{
+  public float getX();
+  public float getY();
+  public float getWidth();
+  public float getHeight();
+}
+ </pre>
+
+            <p>We then state that SquareObject conforms to this interface by changing from:</p>
+
+  <pre class="prettyprint" lang-java>
+class SquareObject</pre>
+            <p>to</p>
+<pre class="prettyprint" lang-java>
+class SquareObject implements canCollide</pre>
+            <p>However, we then have to declare and provide implementations for these methods within the SquareObject
+                class so let’s go ahead and do that:</p>
+<pre class="prettyprint" lang-java>
+public float getX()
+  {
+    return x;
+  }
+  public float getY()
+  {
+    return y;
+  }
+  public float getWidth()
+  {
+    return width;
+  }
+  public float getHeight()
+  {
+    return height;
+  }</pre>
+            <p>Excellent, so now our SquareObject implements the canCollide interface. But what good does that do? Well,
+                we will be able to implement our collision detection methods for ANY object that conforms to this
+                interface without having to worry about which type of object it is. But before we get into all that,
+                let’s quickly create a Platform class for the square to interact with. </p>
+            <p>What does this platform need to do? Well, it needs to have a position (x and y) as well as width and
+                height. It should implement canCollide so it needs those methods as well. It should also be able to draw
+                itself. But let’s make this object immune to gravity, and let’s also hold it still in position so we
+                don’t need to worry about movement code. Similarly to SquareObject, let’s make its constructor able to
+                set the x and y position it starts off in. Let’s also change the draw function so that it’s drawn in
+                bright blue, just to make it clear where it is:</p>
+<pre class="prettyprint" lang-java>
+class Platform implements canCollide
+{
+  private float x,y, width=200,height=50;
+  public Platform(float x, float y)
+  {
+    this.x=x;
+    this.y=y;
+  }
+}</pre>
+            <p>The canCollide methods also happen to share the implementation from SquareObject so let’s use these as
+                well.</p>
+<pre class="prettyprint" lang-java>
+public float getX()
+  {
+    return x;
+  }
+  public float getY()
+  {a
+    return y;
+  }
+  public float getWidth()
+  {
+    return width;
+  }
+  public float getHeight()
+  {
+    return height;
+  }
+public void draw()
+  {
+    fill(0,0,255);
+    rect(x, y, width,height);//currently the square is of a fixed size
+  }</pre>
+            <p>Let’s go ahead and make the platform show up on screen. Add a private variable to Controller called
+                platform of type Platform:</p>
+            <pre class="prettyprint" lang-java>private Platform platform;</pre>
+            <p>In the constructor for Controller, let’s set the position of the platform to somewhere lower down on the
+                screen such as (30,250). Don’t forget to add platform.draw() to the update() method of Controller so
+                that we can actually see our beautiful platform. </p>
+            <img src="Images/3_1.png" alt="Picture 3.1">
+            <p>Excellent, now we can see our platform! But a collision with it doesn’t do anything…</p>
+
+
+            <h2>
+                <small>Extension Tasks:</small>
+            </h2>
+
+            <ul>
+                <li>Try making the platform move around the screen with a move() method that Controller calls. Perhaps
+                    it could always position itself to be below the square?
+                </li>
+            </ul>
+
+            <p>
+            <h2>
+                <small>Task 3.2</small>
+            </h2>
+            </p>
+            <p>So now that we have a platform and a square that both implement canCollide, it’s on to the fun part: the
+                collision detection and handling itself.
+                Let’s create a class for collision detection called (you guessed it!) CollisionDetection. This needs to
+                have a method that detects a collision when given two objects than implement canCollide.
+                Let’s call this method collision (please forgive my lack of creativity in naming!). For now, let’s just
+                have it return a Boolean value if there is a collision detected.
+                There are 4 checks that have to fail for a collision to be present, so our method will check each of
+                these in turn and if any fail it will return false.
+            </p>
+            <p>4 checks have to be carried out, and they must all fail in order for no collision to be present. </p>
+            <ol>
+                <li>if A left edge is to the right of B right edge, it can't be colliding</li>
+                <li>if A's right edge is to the left of B's left, then it can't be colliding</li>
+                <li>if A's top edge is below B's bottom, then it can't be colliding</li>
+                <li> 4) if A's bottom edge is above B's top edge, then it can't be colliding.</li>
+            </ol>
+            <p>Note: this assumes that the two colliding objects are rectangular.
+                The co-ordinate system used has x,y as the top left co-ordinates of the shape
+                So our code for the CollisionDetection class looks as follows:
+            </p>
+<pre class="prettyprint" lang-java>
+  class CollisionDetection
+{
+  public Boolean collision(canCollide a,canCollide b)
+  {
+    if (a.getX() &gt; (b.getX()+b.getWidth()))
+    {
+      return false;
+    }
+    if ((a.getX()+a.getWidth())&lt;b.getX())
+    {
+      return false;
+    }
+    if (a.getY() &gt; (b.getY()+b.getHeight()))
+    {
+      return false;
+    }
+    if ((a.getY()+a.getHeight())&lt;b.getY())
+    {
+      return false;
+    }
+    return true;
+  }
+}</pre>
+            <p>It doesn’t do anything on its own, so let’s make a new CollisionDetection instance called
+                collisionDetector in the Controller class:</p>
+            <pre class="prettyprint"
+                 lang-java>private CollisionDetection collisionDetector=new CollisionDetection();</pre>
+            <p>After the platform.draw() call in the update() method of the Controller, add another line that will check
+                for a collision between the two objects and for now, let’s have it simply flash the background colour a
+                horrible blue colour:</p>
+<pre class="prettyprint" lang-java>if (collisionDetector.collision(square,platform))
+    {
+      background(0,0,255);
+    }</pre>
+            <p>Let’s also tone down the velocity that our square travels at to a more comfortable level. 0.4 (and -0.4)
+                work quite nicely for square velocity so we could change all of the case statements inside the update()
+                function of controller to take an argument of 0.4 and -0.4. But in the interests of making the code as
+                modular and maintainable as possible, let’s instead create a new integer called squareVelocity
+                (initialised to 0.4) and have the case statements take arguments as either positive or negative
+                squareVelocity. </p>
+            <img src="Images/3_2.png" alt="Picture 3.2">
+
+            <p>Perfect (though very ugly), our collision detection code is now working. Let’s do something interesting
+                with it.</p>
+            <p>
+            <h2>
+                <small>Task 3.3</small>
+            </h2>
+            </p>
+            <p>Now to have some fun. The coefficient of restitution determines the velocity of the object after its
+                collision; the higher the number the higher the velocity remains after colliding. This value is the
+                combined properties of both of the colliding objects, but for simplicity we can model this as each
+                platform having a unique value attached to it. Add a new property to the Platform object called
+                restitution as a float value.</p>
+<pre class="prettyprint" lang-java>public Platform(float x, float y, float restitution)
+  {
+    this.x=x;
+    this.y=y;
+    this.restitution=restitution;
+  }
+</pre>
+            <p>Also, change the object creation in the controller class to match the updated constructor and give a
+                value of 0.5 for the new coefficient of restitution argument. We also need to add a method in Platform
+                to get the coefficient of restitution if a collision IS detected:</p>
+<pre class="prettyprint" lang-java>public float getRestCoeff()
+  {
+    return restitution;
+  }</pre>
+            <p>Just knowing that a collision is occurring isn’t enough, we need to know which side of the platform
+                object A has collided on. We can do this by working out which angle our square comes in from. </p>
+            <img src="Images/3_3.png" alt="Picture 3.3">
+            <p>As shown above, if the square comes in at an angle between the two top/bottom corners, then it’s a
+                vertical collision, otherwise it’s a horizontal collision. We then split it up further into which
+                direction it’s coming from by using the co-ordinates of the centres of the two objects and working out
+                where they are relative to one another. </p>
+  <pre class="prettyprint" lang-java>public int getDirection(canCollide a, canCollide b)
+  {
+    //1,2,3,4 are possible return values corresponding to top,right,bottom,left
+    if (CollisionIsVertical(a,b)) //if the collision is vertical, we have to work out if A is colliding on the top or bottom 
+    {
+      if (a.getY()+(a.getHeight()/2) &gt; b.getY()+(b.getHeight()/2))
+      {
+        return 1; //'top' collision
+      }
+      else
+      {
+        return 3; //'bottom' collision
+      }
+    }
+    else
+    {
+      if (a.getX()+(a.getWidth()/2) &gt; b.getX()+(b.getWidth()/2))
+      {
+        return 2; //'right' collision
+      }
+      else
+      {
+        return 4; //'left' collision
+      }
+    }
+  }
+  
+  private Boolean CollisionIsVertical(canCollide a, canCollide b) 
+  {
+    float angle = getAngle(a,b);
+    //need to calculate the angles that A could travel into B at for it to be considered 'vertical' 
+    float verticalAngle =(float) Math.toDegrees(Math.atan(3.0)); 
+    if (Math.abs(angle)&lt;verticalAngle)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+  
+  private float getAngle(canCollide a,canCollide b) //this returns the int in relation to a moving into b
+  {
+    //this function compares their centres so we must first compute these centres of A and B
+    float aCentrex = a.getX() + (0.5*a.getWidth());
+    float aCentrey = a.getY() + (0.5*a.getHeight());
+    float bCentrex = b.getX() + (0.5*b.getWidth());
+    float bCentrey = b.getY() + (0.5*b.getHeight());
+    float xDifference = aCentrex - bCentrex;
+    float yDifference = aCentrey - bCentrey;
+    return (float) Math.toDegrees(Math.atan(xDifference/yDifference));    
+  }</pre>
+            <p>Now that we can measure where and when collisions happen, let’s add a method to our canCollide interface.
+                It should handle what happens when a collision is detected, and take an argument of our integer for
+                collision direction, as well as the object it is colliding with :</p>
+            <pre class="prettyprint" lang-java>public void handleCollide(int direction, canCollide b);</pre>
+            <p>As both of our classes Platform and SquareObject implement canCollide, they must implement this method in
+                some way. For the purposes of this guide, we won’t make the method in Platform do anything and leave it
+                blank. </p>
+            <pre class="prettyprint" lang-java>public void handleCollide(int direction, canCollide b) {}</pre>
+            <p>Let’s also add our method from Platform getRestCoeff() to the canCollide interface, as all objects that
+                implement canCollide will need this function to be useful. As we are only considering one coefficient of
+                restitution between the objects for now, we will implement an empty method for SquareObject:</p>
+  <pre class="prettyprint" lang-java>public float getRestCoeff()
+  {
+    return -1;
+  }
+</pre>
+            <p>So we want the SquareObject to simulate a ‘bounce’. How do we do this? Well, we can reverse the velocity
+                in the y direction and also make it go to the outside edge of the platform (so the object doesn’t look
+                like it’s inside the platform). This is why we wanted to calculate the direction of the collision, so
+                that we could place it in the right spot and reverse the correct velocity. We don’t just want to reverse
+                the velocity though, we want it to be reduced by the coefficient of restitution to seem like a ‘real’
+                collision. If it’s colliding from the top, then we want to place the SquareObject on the top of the
+                platform so that it looks like it’s in the right spot, and so on and so forth for each edge. This can be
+                achieved with the following code: </p>
+  <pre class="prettyprint" lang-java>public void handleCollide(int direction, canCollide b)
+  {
+    float restCoeff = b.getRestCoeff();
+    switch (direction)
+    {
+      case 1://'top' collision
+        yVelocity=-1 * restCoeff * yVelocity;
+        y = b.getY()+b.getHeight();
+        break;
+      case 2://'right' collision
+        xVelocity = -1 * restCoeff * xVelocity;
+        x = b.getX()+b.getWidth();
+        break;
+      case 3: //'bottom' collision
+        yVelocity=-1 * restCoeff * yVelocity;
+        y = (b.getY())-height;
+        break;
+      case 4://'left' collision  
+        xVelocity = -1 * restCoeff * xVelocity;
+        x = b.getX()-width;
+        break;       
+    }   
+  }</pre>
+            <p>We’re nearly there! We just need to call our collision code if a collision is actually detected. In the
+                main controller, change the if collision detected block to get the direction from the collisionDetector
+                object, then call the square’s handleCollide method with the direction and object that it’s colliding
+                with (our beautiful platform). Make sure this block is run before both objects are drawn (but after
+                square updates) so that you never have to see the half-collided square, just the bounce. </p>
+  <pre class="prettyprint" lang-java>if (collisionDetector.collision(square,platform))
+    {
+      int direction = collisionDetector.getDirection(square,platform);
+      square.handleCollide(direction,platform);
+    }</pre>
+
+            <p>
+            <h2>
+                <small>Extension Tasks:</small>
+            </h2>
+            </p>
+            <ul>
+                <li>Try making the platform object do something on collision as well. Maybe changing colour, or actually
+                    moving according to simulated ‘mass’ that you can give the objects.
+                </li>
+                <li>See if you can think of a way to include both coefficients of restitution in the calculations. This
+                    might make the SquareObject more ‘bouncy’ on all surfaces.
+                </li>
+            </ul>
+
+
+            <br><br><br>
+        </div>
+    </div>
+</div>
+</body>
+</html>

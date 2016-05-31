@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Processing Physics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sons-of-obsidian"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">Processing Physics</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Basics of Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="intro.html">Introduction and Contents</a></li>
+                    <li><a href="syntax.html">Lesson 1 - Syntax</a></li>
+                    <li><a href="datatypes&variables.html">Lesson 2 - Data Types and Variables</a></li>
+                    <li><a href="operators.html">Lesson 3 - Operators</a></li>
+					<li><a href="arrays.html">Lesson 4 - Arrays</a></li>
+                    <li><a href="methods.html">Lesson 5 - Methods</a></li>
+					<li><a href="selection.html">Lesson 6 - Selection</a></li>
+                    <li><a href="iteration.html">Lesson 7 - Iteration</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Advanced Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="classes&objects.html">Lesson 1 - Classes and Objects</a></li>
+                    <li><a href="inheritance&scope.html">Lesson 2 - Inheritance and Scope</a></li>
+                    <li><a href="interfaces&methodsignatures.html">Lesson 3 - Interfaces and Method Signatures</a></li>
+                </ul>
+            </li>
+            <li><a href="physics.html">The Physics</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Simulation<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="input-draw.html">Task 1 - Input and Drawing</a></li>
+                    <li><a href="gravity-velocity.html">Task 2 - Gravity and Velocity</a></li>
+                    <li><a href="collisions.html">Task 3 - Collisions</a></li>
+                    <li><a href="friction.html">Task 4 - Friction</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="container-fluid">
+            <h3>Fixed Navbar</h3>
+            <h1 class="text-center">Inheritance and Scope</h1>
+            <p>When engaging in Object Oriented Programming, classes are not merely for organising subsections of code –
+                they also allow you to reuse code you have already written for new purposes.</p>
+  <pre class="prettyprint" lang-java>
+class Dog {
+    private int happiness;
+    private String name;
+    public Dog(String new_name)
+    {
+        this.happiness = 1;
+        this.name = new_name;
+    }
+    public int petMe()
+    {
+        System.out.print("Woof!\n");
+        return ++happiness;
+    }
+    public void bark()
+    {
+        System.out.print("Bark!\n");
+    }
+    public void roll()
+    {
+        System.out.print("The dog rolls in something. Somebody needs a bath!\n");
+    }
+}  </pre>
+            <p>Consider the case of the humble dog. Dogs have happiness which they show back to you (here represented in
+                integer format), they have a name, they bark, they roll, and they can be petted. But say if you wanted a
+                specific type of dog… We COULD create an entirely new class from scratch which had the same few methods,
+                but there’s a better way by taking advantage of a feature of Object Oriented Programming called <b>Inheritance</b>.
+            </p>
+  <pre class="prettyprint" lang-java>
+class Pomeranian extends Dog {
+    private int fluffiness;
+    public Pomeranian(String new_name)
+    {
+        super(new_name); // For the constructor, this needs to come first.
+        this.fluffiness = 1;
+    }
+    public void bark()
+    {
+        System.out.print("Yip!\n");
+    }
+    public int petMe(int tussle_amount)
+    {
+        System.out.print("You tussle the pomeranian's floofy fluff!\n");
+        this.fluffiness += tussle_amount;
+        return super.petMe();
+    }
+    public void doTrick()
+    {
+        System.out.print("This is such a well-trained breed.\n");
+        System.out.print("Just kidding. The pomeranian falls asleep.\n");
+    }
+}  </pre>
+            <p>For now, let’s look at the first line. We are declaring a new class called <i>Pomeranian</i> that <b>extends</b>
+                the <i>Dog</i> class. (If you don’t know what a Pomeranian looks like, drop everything and spend the
+                rest of today’s class Ask Jeeves-ing or however kids internet-search these days for pictures of them.)
+                Inheritance means that you have access to all of the parent methods without needing to implement them
+                again.</p>
+            <p>In this instance, the Pomeranian class directly uses the parent <i>Dog</i>’s <i>roll()</i> method, <b>overrides</b>
+                <i>bark()</i>, has an <b>overloaded</b> <i>petMe(int)</i> method and has a new <i>doTrick()</i> method.
+                In addition, it has its own constructor method. Both the constructor and the overloaded
+                <i>petMe(int) </i>call <b>super</b> methods. This is a lot to take in, so we’ll go through this step by
+                step.</p>
+  <pre class="prettyprint" lang-java>
+public Pomeranian(String new_name)
+{
+    super(new_name); // For the constructor, this needs to come first.
+    this.fluffiness = 1;
+}  </pre>
+            <p>You notice the first line of the constructor method, right? This initialises everything about class <i>Pomeranian</i>
+                that is shared with class <i>Dog</i> – in this case, the <i>happiness</i> and <i>name</i> fields. If you
+                think the comment is a little weird, you would be right; it’s a quirk of Java that the <b>super</b> call
+                needs to come first in the constructor.</p>
+  <pre class="prettyprint" lang-java>
+public void bark()
+{
+    System.out.print("Yip!\n");
+}  </pre>
+            <p>We say that <i>Pomeranian</i>’s <i>bark()</i> <b>overrides</b><i> Dog</i>’s <i>bark()</i>, which means
+                that it is effectively replaced for class <i>Pomeranian</i>. This is not exactly a bark, due to its
+                different onomatopoeia; this is the fault of the original implementation of class<i> Dog</i> for
+                attempting to class a wide variety of excited noises across many breeds under a single all-encompassing
+                name. A better name – if we were redesigning the parent class – would be something like <i>showExcitedness()</i>…
+                but this is besides the point. With Object Oriented Programming, there is a danger of making your code
+                hard to understand if you override without being careful about whether your new functionality is a valid
+                replacement.</p>
+  <pre class="prettyprint" lang-java>
+public int petMe(int tussle_amount)
+{
+    System.out.print("You tussle the pomeranian's floofy fluff!\n");
+    this.fluffiness += tussle_amount;
+    return super.petMe();
+}  </pre>
+            <p>You might be forgiven for thinking the above was another instance of <b>overriding</b>… but this actually
+                demonstrates a completely different phenomenon which is also useful to know. As you can see, this <i>petMe(int)</i>
+                method has an <b>int</b> argument – but the method <i>petMe()</i> in the <i>Dog</i> class does not. This
+                is known as <b>overloading</b>, which is more generally creating multiple methods with the same name but
+                different arguments and behaviour. The <i>petMe()</i> without an argument from the superclass is still
+                accessible through Pomeranian, as well. This also demonstrates another usage of the <b>super</b>
+                keyword, showing that there are no limitations on when you can call public super methods.</p>
+            <p><i>doTrick()</i> is nothing special. It’s a new public method which is available only to the subclass and
+                not the superclass and is barely worth the start of this paragraph. In addition, <i>roll()</i> is not
+                overridden and is directly accessible via the subclass. These are the trivial parts of inheritance, and
+                are not to be worried about. There are some things which need to be taken seriously, however.</p>
+  <pre class="prettyprint" lang-java>
+class Chihuahua extends Dog {
+    public Chiuaua(String new_name)
+    {
+        super(new_name);
+    }
+    public void bark()
+    {
+        System.out.print("Yap!\n");
+        this.happiness++; // This line will cause the program to fail.
+    }
+}  </pre>
+            <p>This is a <i>Chihuahua</i>; they go nuts just on their own, even without human interaction. This is
+                modelled via <i>overriding</i> the <b>bark()</b> method to increment happiness. The parent class has
+                happiness, right? Unfortunately, it turns out this causes the program to fail, as the Chihuahua does not
+                actually have access to its happiness attribute. Why is this the case? Let’s look all the way back to
+                class Dog…</p>
+  <pre class="prettyprint" lang-java>
+class Dog {
+    private int happiness;
+    . . .</pre>
+            <p>Oh, this is why. The <i>happiness</i> variable is a <b>private int</b>! But… wait, <b>private</b> is
+                supposed to mean that the variable is inaccessible from outside class <i>Dog</i>, like from its owner.
+                Why can’t a specific type of <i>Dog</i> access it? It turns out this is another instance of
+                encapsulation limiting what we are able to do with the variable. (Remember that it doesn’t need to be a
+                variable specifically, though – it could just as easily be a method – or even a constructor, but that is
+                beyond the scope of this tutorial.)</p>
+            <p>If we want to be able to access <i>happiness</i> from the subclass, we need to make a change to the
+                superclass. The simplest way is outlined below.</p>
+  <pre class="prettyprint" lang-java>
+class Dog {
+    protected int happiness;
+    . . .</pre>
+            <p>By changing the <b>private</b> variable to a <b>protected</b> variable, we make it directly accessible to
+                the inherited classes without allowing it to be accessible externally. However, there is a downside in
+                that it makes the implementation specifics of the Dog superclass directly relevant to its subclasses.
+                This means that if we were to rewrite <i>Dog</i>, we’d have to alter <i>Chihuahua</i> to match.</p>
+  <pre class="prettyprint" lang-java>
+class Dog {
+    private int happiness;
+    . . .
+    protected void changeHappiness(int amount)
+    {
+        this.happiness += amount;
+    }
+    . . .</pre>
+  <pre class="prettyprint" lang-java>
+class Chihuahua extends Dog {
+    . . .
+    public void bark()
+    {
+        System.out.print("Yap!\n");
+        changeHappiness(1); // This is allowed now.
+    }
+}</pre>
+            <p>This is a more flexible long-term solution; by keeping happiness <b>private</b> but providing a <b>protected</b>
+                method, any change to how happiness is stored in <i>Dog</i> wouldn’t require a rewrite of
+                <i>Chihuahua</i>.</p>
+            <p>One exercise for the reader is to consider a class that <i>Dog</i> would inherit from in the first place.
+                Is it a type of <i>Wolf</i>? Or is it a <i>Mammal</i> in general? Perhaps it might be a <i>Pet</i> –
+                although considering the next chapter, it would probably be wiser to handle a set of <i>Pet</i>-appropriate
+                methods differently…</p>
+            <br></br>
+            
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

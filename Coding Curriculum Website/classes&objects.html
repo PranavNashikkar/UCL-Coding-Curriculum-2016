@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Processing Physics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sons-of-obsidian"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">Processing Physics</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Basics of Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="intro.html">Introduction and Contents</a></li>
+                    <li><a href="syntax.html">Lesson 1 - Syntax</a></li>
+                    <li><a href="datatypes&variables.html">Lesson 2 - Data Types and Variables</a></li>
+                    <li><a href="operators.html">Lesson 3 - Operators</a></li>
+					<li><a href="arrays.html">Lesson 4 - Arrays</a></li>
+                    <li><a href="methods.html">Lesson 5 - Methods</a></li>
+					<li><a href="selection.html">Lesson 6 - Selection</a></li>
+                    <li><a href="iteration.html">Lesson 7 - Iteration</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Advanced Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="classes&objects.html">Lesson 1 - Classes and Objects</a></li>
+                    <li><a href="inheritance&scope.html">Lesson 2 - Inheritance and Scope</a></li>
+                    <li><a href="interfaces&methodsignatures.html">Lesson 3 - Interfaces and Method Signatures</a></li>
+                </ul>
+            </li>
+            <li><a href="physics.html">The Physics</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Simulation<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="input-draw.html">Task 1 - Input and Drawing</a></li>
+                    <li><a href="gravity-velocity.html">Task 2 - Gravity and Velocity</a></li>
+                    <li><a href="collisions.html">Task 3 - Collisions</a></li>
+                    <li><a href="friction.html">Task 4 - Friction</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="container-fluid">
+            <h3>Fixed Navbar</h3>
+            <h1 class="text-center">Classes and Objects</h1>
+            <p>Programmers often like to find shortcuts so that making concepts reality doesn’t take a large amount of
+                time. Often, with a little careful analysis, you can break down a large piece design into several
+                smaller ideas, each interacting with each-other. Some programming languages can help you think like
+                this; the Java language has several ways of implementing these thoughts.</p>
+            <p>When you can clearly identify an idea as part of a larger concept, you can take some effort to separate
+                it out as a Class. Classes are like miniature programs in and of themselves; they have their own
+                variables, their own functions, and their own start up main method which is called when you create an
+                instance of them. The syntax is slightly different, however.</p>
+  <pre class="prettyprint" lang-java>
+class MyClass {
+  private int my_integer;
+  public String my_string;
+  public MyClass(int temporary_integer, String temporary_string)
+  {
+	this.my_integer = temporary_integer;
+	this.my_string = temporary_string;
+  }
+  public int getInteger()
+  {
+	return this.my_integer;
+  }
+}  </pre>
+            <p>Here is an example Class. You may notice the keywords <b>public</b> and <b>private</b> in this code
+                snippet; they are important to know but will be covered shortly. There are three key sections of
+                defining a Class.</p>
+            <p>First, a set of <b>variables</b> that this Class is in control of are declared but not given value. You
+                cannot give default values here, as the Class will not be processing anything at this point; you are
+                essentially defining a cookie cutter base right now.</p>
+            <p>The second major part of the Class definition is the <b>constructor</b> – essentially its main method,
+                guaranteed to be run when an instance of this Class is created. This is essentially a function that does
+                not require a return nor a type (note the lack of <b>int</b>, <b>void</b>,<i> </i>or any other type). It
+                is, however, absolutely necessary that this constructor function has the same name as the Class. You can
+                access and set any of the variables declared above via prefacing them with the keyword <b>this.</b>, and
+                if you set up proper arguments for the constructor you can essentially configure what an instance of a
+                Class will be like when creating it.</p>
+            <p>The third section of the definition is a set of functions which it can call, or which can be called on it
+                if you have an instance of it. In Object Oriented Programming, these are called <b>methods</b>. In this
+                circumstance, there is one method – but there can be situations where you have zero methods, or where
+                you have many of them. It is bad practice for your classes to have hundreds of methods, though.</p>
+            <p>Now that we’ve created our class, we need to be able to use it and its handy methods elsewhere in the
+                code. Here is an example extending the previous code snippet.</p>
+  <pre class="prettyprint" lang-java>
+MyClass class_instance = new MyClass(27, "Hello World");  </pre>
+            <p>A Class is essentially an extension of the type system, which means that you can declare variables of
+                type <i>MyClass</i> – which are used to store instances of this Class. Indeed, note the use of the <b>new</b>
+                keyword; the variable <i>class_instance</i> is initialised with a new instance of <i>MyClass</i>. This
+                uses the constructor function defined above; <i>temporary_integer</i> is set to 27, whilst <i>temporary_string</i>
+                is set to “Hello World” – which in turn leads to internal variables <i>my_integer</i> and
+                <i>my_string</i> being set to these values. When doing Object Oriented Programming, we call an instance
+                of a Class an Object. Now, let’s try to interact with the Object. It has variables inside it, right?
+                What if we try to access those variables?</p>
+  <pre class="prettyprint" lang-java>
+int some_integer = class_instance.my_integer; // This line will fail!
+String some_string = class_instance.my_string; // Set to "Hello World"  </pre>
+            <p>It turns out that although we can access the <i>my_string</i> variable through the Object, we are unable
+                to read <i>my_integer</i>. Why is this? Look above at the code snippet for the Class MyClass to see what
+                you think before moving on.</p>
+            <p>It turns out it has to do with the keywords used when declaring elements inside the Class, <b>public</b>
+                and <b>private</b>. Remember how we set <i>my_string</i> to be a <b>public String</b>, but
+                <i>my_integer</i> to be a <b>private int</b>? This effectively limits how you can access one piece of
+                code from other parts of it. If we wanted to set <i>some_integer</i> properly, we would instead use the
+                public method available to read what is in <i>my_integer</i>.</p>
+  <pre class="prettyprint" lang-java>
+int some_integer = class_instance.getInteger(); // Set to 27</pre>
+            <p>You might think this overcomplicates things. Surely a programmer should have full control over their
+                code? Another principle of Object Oriented Programming is <b>encapsulation</b> - that each Object should
+                know as little as possible about any other Object’s internal workings, meaning any change in a given
+                Class should require as little code changes elsewhere as possible.</p>
+            <p>The important concept is that limiting things in this way means that your code is easier to understand,
+                and the less connected it is the less complicated it is to maintain at later dates. Changing how things
+                work behind the scenes in class <i>MyClass</i> when adhering to these principles will not cause your
+                program to need to be rewritten elsewhere.</p>
+            <p>Many programmers set up a consistent interface of <b>getter methods</b> (for example, <i>getInteger()</i>)
+                and <b>setter methods</b>. These examples do not show any setter methods; these can be written with
+                similar principles as the constructor, but with a return type necessary. Try writing your own setter
+                method for <i>my_integer</i> in <i>MyClass</i> to experiment.</p>
+  <pre class="prettyprint" lang-java>
+MyClass class_instance[] = new MyClass[100];
+int i;
+for (i = 0; i < 100; i++;)
+{
+	MyClass class_instance[i] = new MyClass(i, "One hundred strong.");
+}  </pre>
+            <p>One final fun fact: You can create as many instances of a Class as you like, as well as use them as a
+                type when creating Arrays and other data structures.</p>
+            <br></br>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

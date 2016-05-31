@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Processing Physics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sons-of-obsidian"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">Processing Physics</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Basics of Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="intro.html">Introduction and Contents</a></li>
+                    <li><a href="syntax.html">Lesson 1 - Syntax</a></li>
+                    <li><a href="datatypes&variables.html">Lesson 2 - Data Types and Variables</a></li>
+                    <li><a href="operators.html">Lesson 3 - Operators</a></li>
+					<li><a href="arrays.html">Lesson 4 - Arrays</a></li>
+                    <li><a href="methods.html">Lesson 5 - Methods</a></li>
+					<li><a href="selection.html">Lesson 6 - Selection</a></li>
+                    <li><a href="iteration.html">Lesson 7 - Iteration</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Advanced Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="classes&objects.html">Lesson 1 - Classes and Objects</a></li>
+                    <li><a href="inheritance&scope.html">Lesson 2 - Inheritance and Scope</a></li>
+                    <li><a href="interfaces&methodsignatures.html">Lesson 3 - Interfaces and Method Signatures</a></li>
+                </ul>
+            </li>
+            <li><a href="physics.html">The Physics</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Simulation<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="input-draw.html">Task 1 - Input and Drawing</a></li>
+                    <li><a href="gravity-velocity.html">Task 2 - Gravity and Velocity</a></li>
+                    <li><a href="collisions.html">Task 3 - Collisions</a></li>
+                    <li><a href="friction.html">Task 4 - Friction</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="container-fluid">
+            <h3>Fixed Navbar</h3>
+			<h1 class="text-center">6. Selection</h1><br><br>
+			<p>Selection refers to the <em>decision making</em> concept in programming. This means a certain condition is <em>considered</em> and if it happens to be <em>true</em>, a certain <em>operation</em> occurs. The opposite can also happen, so if it is <em>false</em>, another action occurs.</p>
+<br><h3 class="text-center">6.1 IF Statement</h3>
+			<p>In Java this is best done by an IF statement.</p>
+
+<p>Below is a <em>flow chart</em> that visually displays the concept of an IF selection statement and how it works. A <em>boolean</em> <em>expression</em> or <em>condition</em> is expressed and depending on the outcome, a certain action will be performed but not both.</p>
+			<br><img src="Images/selection1.png" width="1000">
+			<p>The syntax of an if statement is quite simple, it consists of a <em>boolean expression</em> to be <em>evaluated</em>. If the statement is <em>true</em>, the first block of code is run, otherwise if <em>false</em> you can use the Java key word <em>else</em> to run another block of code. These <em>blocks of code </em>must be separated by curly braces.</p>
+<p>Here is an example:</p>
+<pre class="prettyprint" lang-java>String output;
+int testNumber=5;
+
+if(testNumber==5){
+output="The condition is true";
+}else{
+output="The condition is false";
+}
+
+System.out.println(output);</pre>
+
+<p>In the example above the if statement evaluates whether the integer variable testNumber is 5, and if so, the output will be &ldquo;The condition is true&rdquo;, otherwise if false, the output will be &ldquo;The condition is false&rdquo;.</p>
+<p>Output when testNumber is 5:</p>
+
+<img src="Images/selection2.png"><br><br>
+
+<pre class="prettyprint" lang-java>int testNumber=64;</pre>
+
+<p>Output when testNumber is 64:</p>
+
+<img src="Images/selection3.png"><br>
+
+<br><h3 class="text-center">6.2 SWITCH Statement</h3><br>
+<p>However, if you have <em>many conditions</em> that might need evaluating, multiple if statements can be tedious to write and hard to read. This is where the <em>switch </em>statement comes in. This allows you to evaluate <em>multiple</em> conditions in one block of code.</p>
+			
+			<p>A <em>single</em> variable can be <em>evaluated</em> against <em>many</em> values so the<em> argument passed</em> into the switch statement is the variable being tested.</p>
+<ul>
+<li><p><em>Case</em> key words identify what happens when there is <em>equality</em> between the argument variable and a chosen condition. Each <em>case </em>block of code must include a colon after the boolean expression.</p>
+<li><p><em>Break</em> key word tells the loop/selection block of code to <em>exit</em> the loop/selection statement if it is reached.</p>
+<li><p><em>Default </em>key word identifies what happens when <em>none</em> of the boolean expressions are evaluated to be true.</p>
+</ul><p>Below is a flow chart that visualises how the switch statement works:</p>
+
+<img src="Images/selection4.png">
+
+<p>Here is an example block of code for a SWITCH statement: </p>
+
+<pre class="prettyprint" lang-java>String output;
+int testNumber=5;
+
+switch(testNumber){
+case 1:
+	output="The number is 1";
+	break;
+case 2:
+	output="The number is 2";
+	break;
+case 3:
+	output="The number is 3";
+	break;
+default:
+	output="The number is not 1,2, or 3";
+	break;
+}
+
+System.out.println(output);
+}</pre>
+
+<p>Here is the result when testNumber is 5:</p>
+
+<img src="Images/selection6.png"><br><br>
+
+
+<pre class="prettyprint" lang-java>int testNumber=3;</pre>
+
+<p>Here is the result when testNumber is 3:</p>
+
+<img src="Images/selection5.png">
+
+
+
+
+
+
+
+
+
+
+
+			<br><br><br>
+        </div>
+    </div>
+</div>
+</body>
+</html>

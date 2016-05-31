@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Processing Physics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sons-of-obsidian"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">Processing Physics</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Basics of Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="intro.html">Introduction and Contents</a></li>
+                    <li><a href="syntax.html">Lesson 1 - Syntax</a></li>
+                    <li><a href="datatypes&variables.html">Lesson 2 - Data Types and Variables</a></li>
+                    <li><a href="operators.html">Lesson 3 - Operators</a></li>
+					<li><a href="arrays.html">Lesson 4 - Arrays</a></li>
+                    <li><a href="methods.html">Lesson 5 - Methods</a></li>
+					<li><a href="selection.html">Lesson 6 - Selection</a></li>
+                    <li><a href="iteration.html">Lesson 7 - Iteration</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Advanced Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="classes&objects.html">Lesson 1 - Classes and Objects</a></li>
+                    <li><a href="inheritance&scope.html">Lesson 2 - Inheritance and Scope</a></li>
+                    <li><a href="interfaces&methodsignatures.html">Lesson 3 - Interfaces and Method Signatures</a></li>
+                </ul>
+            </li>
+            <li><a href="physics.html">The Physics</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Simulation<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="input-draw.html">Task 1 - Input and Drawing</a></li>
+                    <li><a href="gravity-velocity.html">Task 2 - Gravity and Velocity</a></li>
+                    <li><a href="collisions.html">Task 3 - Collisions</a></li>
+                    <li><a href="friction.html">Task 4 - Friction</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="container-fluid">
+            <h3>Fixed Navbar</h3>
+            <h1 class="text-center">Interfaces and Method Signatures</h1>
+            <p>There are a few more surprises up Object Oriented Programming’s sleeves yet to come.</p>
+  <pre class="prettyprint" lang-java>
+interface Motor {
+    public void spin();
+}</pre>
+            <p>The above is an example of an <b>interface</b>. It looks suspiciously like a class, but it’s forbidden
+                from having method bodies (in most versions of Java, at least), variables, or constructors (which means
+                you can’t create instances of an interface directly). The idea is to define a set of <b>method
+                    signatures</b> which can be presumed to be present across multiple classes. Confused? Here’s an
+                example of a class that uses this interface.</p>
+  <pre class="prettyprint" lang-java>
+class DieselEngine implements Motor {
+    private int fuel;
+    public DieselEngine()
+    {
+        this.fuel = 0;
+    }
+    public void fuel(int amount)
+    {
+        if ((this.fuel + amount) > 0)
+        {
+            this.fuel += amount;
+        }
+    }
+    public void spin()
+    {
+        if (this.fuel)
+        {
+            System.out.print("Chugga chugga.\n");
+            this.fuel--;
+        }
+        else { System.out.print("Clunk.\n"); }
+    }
+}</pre>
+            <p>This <i>DieselEngine</i> class <b>implements</b> the <i>Motor</i> interface – hence the usage of that
+                keyword. Notice how this is similar to the <b>extends</b> keyword in inheritance; this relies on similar
+                principles. Indeed, this class has a method with the same <b>method signature</b> as defined in the <i>Motor</i>
+                interface – <i>spin()</i>. This specific implementation of the <i>spin()</i> <b>method signature</b>
+                relies on other components of the class, such as its private int <i>fuel</i> and its fuelling method,
+                <i>fuel()</i>. Now, consider a class <i>Car</i>...</p>
+  <pre class="prettyprint" lang-java>
+class Car {
+    public Motor motor;
+    public Car(Motor motor)
+    {
+        this.motor = motor;
+    }
+    public void accelerator()
+    {
+        this.motor.spin();
+    }
+}</pre>
+  <pre class="prettyprint" lang-java>
+DieselEngine engine = new DieselEngine();
+engine.fuel(1000);
+Car car = new Car(engine);</pre>
+            <p>This is a very bare-bones implementation of a car, but it’s okay – air conditioning costs extra, and we
+                didn’t want to break the budget for this tutorial. Instead, look at how it uses the <i>Motor</i> <b>Interface</b>
+                as a type directly. This means that the <i>Car</i> class is capable of accessing every method signature
+                defined in <i>Motor</i>. The compiler would complain if we tried to get the <i>Motor</i> to
+                <i>fuel()</i> because it cannot be guaranteed that the Car class will be using the <i>DieselEngine</i>
+                class, only that it’s using a class that implements <i>Motor</i> – even though the engine is explicitly
+                created as that.</p>
+            <p>This is another useful facet of <b>encapsulation</b>, preventing issues later when – say – the government
+                outlaws <i>DieselEngine</i>s because they produce high amounts of CO2 emissions. Your average car
+                manufacturer might be scrambling to modify their cars, but you were smart – because you used Interfaces,
+                your bare-bones Car only needs an alternate implementation of the <i>Motor interface</i>. Here’s
+                such an example.</p>
+  <pre class="prettyprint" lang-java>
+interface PowerSupply {
+    ? ? ?
+}</pre>
+  <pre class="prettyprint" lang-java>
+class ElectricMotor implements Motor {
+    private PowerSupply psu;
+    public ElectricMotor(PowerSupply psu)
+    {
+        this.psu = psu;
+    }
+    public swapPSU(PowerSupply psu)
+    {
+        this.psu = psu;
+    }
+    public void spin()
+    {
+        if (this.psu.voltage() >= 1.1)
+        {
+            this.psu.applyLoad(1.1);
+            System.out.print("Whirrrrrr.\n");
+        }
+        else
+        {
+            System.out.print("...\n");
+        }
+    }
+}</pre>
+  <pre class="prettyprint" lang-java>
+Battery battery = new Battery();
+ElectricMotor engine = new ElectricMotor(battery);
+Car car = new Car(engine);</pre>
+            <p>This <i>ElectricMotor</i> is much nicer for the environment, and is a good example of using interfaces to
+                your advantage. Notice the <i>PowerSupply </i>interface, which has been conveniently left blank – this
+                is an exercise for the reader. What do you think that interface would look like? What <b>method
+                    signatures</b> are being used already? Can you think of any other method signatures that aren’t more
+                specific to a <i>Battery</i>? If you have time, also look back at the previous chapter's suggested <i>Pet</i>
+                superclass. That would work a lot better as an interface - what would a <i>Pet</i> interface look like?
+            </p>
+            <br></br>
+            
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

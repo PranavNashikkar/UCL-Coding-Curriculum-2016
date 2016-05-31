@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Processing Physics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sons-of-obsidian"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">Processing Physics</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Basics of Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="intro.html">Introduction and Contents</a></li>
+                    <li><a href="syntax.html">Lesson 1 - Syntax</a></li>
+                    <li><a href="datatypes&variables.html">Lesson 2 - Data Types and Variables</a></li>
+                    <li><a href="operators.html">Lesson 3 - Operators</a></li>
+					<li><a href="arrays.html">Lesson 4 - Arrays</a></li>
+                    <li><a href="methods.html">Lesson 5 - Methods</a></li>
+					<li><a href="selection.html">Lesson 6 - Selection</a></li>
+                    <li><a href="iteration.html">Lesson 7 - Iteration</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Advanced Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="classes&objects.html">Lesson 1 - Classes and Objects</a></li>
+                    <li><a href="inheritance&scope.html">Lesson 2 - Inheritance and Scope</a></li>
+                    <li><a href="interfaces&methodsignatures.html">Lesson 3 - Interfaces and Method Signatures</a></li>
+                </ul>
+            </li>
+            <li><a href="physics.html">The Physics</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Simulation<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="input-draw.html">Task 1 - Input and Drawing</a></li>
+                    <li><a href="gravity-velocity.html">Task 2 - Gravity and Velocity</a></li>
+                    <li><a href="collisions.html">Task 3 - Collisions</a></li>
+                    <li><a href="friction.html">Task 4 - Friction</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="container-fluid">
+            <h3>Fixed Navbar</h3>
+			
+			<h1 class="text-center">3. Operators</h1><br><br>
+			
+			<p>Operators are used in expressions in order to use variables in a specific way. There are four main examples in Java: Logic, Arithmetic, Relational and Assignment operators.</p>
+<br><h3 class="text-center">3.1 Logic Operators</h3>
+<p>These operators aid in evaluating boolean expressions.</p><br>
+<ul>
+<li><strong>&amp;&amp;</strong></li>
+</ul>
+<p>If you want to check if <em>BOTH</em> variable1 <em>AND</em> variable2 meet a <em>condition</em>, you would use the <strong>&amp;&amp;</strong> operator which signifies <strong>AND</strong>.</p>
+<p>Here is an example:</p>
+<pre class="prettyprint" lang-java>int number1=5;
+int number2=6;
+
+if(number1==5&&number2==5){
+	System.out.println("They are BOTH 5");
+}else{
+	System.out.println("One of them is not 5");
+}</pre>
+
+<p>Result when number1 is 5 and number2 is 6:</p>
+<img src="Images/operators1.png"><br><Br>
+
+<p>Result when both number variables are 5: </p>
+<img src="Images/operators2.png">
+
+<p>This shows that the <strong>&amp;&amp;</strong> <em>operator</em> requires <strong>BOTH</strong> variables to meet their conditions for the desired block of code in the IF statement to run</p>
+<br><br>
+<ul>
+<li><strong>||</strong></li>
+</ul>
+<p>If you want to check that <em>AT LEAST </em>variable1 <em>OR</em> variable2 meets a <em>condition, </em>you would use the <strong>|| </strong>operator which signifies <strong>OR.</strong></p>
+<p>Here is an example:</p>
+
+<pre class="prettyprint" lang-java>int number1=5;
+int number2=6;
+
+if(number1==5||number2==5){
+	System.out.println("AT LEAST one of them is 5");
+}else{
+	System.out.println("None of them are 5");
+}</pre>
+
+<p>Result when number1 is 5 and number2 is 6:</p>
+<img src="Images/operators3.png"><br><br>
+
+<p>Result when number1 is 7 and number2 is 6: </p>
+<img src="Images/operators4.png">
+
+<br><br><br>
+<ul>
+<li><strong>!</strong></li>
+</ul>
+<p>If you want to <em>reverse</em> the <em>boolean expression result</em> you would use the <strong>! </strong>operator as it makes a a <em>true</em> condition <em>false</em> and a <em>false</em> condition <em>true</em>.</p>
+<p>Here is an example:</p>
+<pre class="prettyprint" lang-java>int number1=7;
+
+if(number1==7){
+	System.out.println("The condition is true");
+}else{
+	System.out.println("The condition is false");
+}</pre>
+
+<p>Result when number1 is 7 in normal IF statement:</p>
+<img src="Images/operators5.png"><br><br>
+
+
+<pre class="prettyprint" lang-java>int number1=7;
+
+if(!(number1==7)){
+	System.out.println("The condition is true");
+}else{
+	System.out.println("The condition is false");
+}</pre>
+<p>Result when number1 is 7 but ! operator is used in IF statement boolean expression: </p>
+
+<img src="Images/operators6.png">
+
+<br><br><h3 class="text-center">3.2 Arithmetic Operators</h3><br>
+
+<p>These are simple to use operators that are involved in mathematical calculations.</p>
+<ul>
+<li><strong>+ </strong></li>
+</ul>
+<p>This <strong>+</strong> operators adds two values.</p>
+<p>Here is an example and result:</p>
+<pre class="prettyprint" lang-java>int number1=6;
+int number2=3;
+
+System.out.println(number1+number2);</pre>
+<img src="Images/operators7.png"><br><br>
+
+<ul>
+<li><strong>-</strong></li>
+</ul>
+<p>This<strong> &ndash;</strong> operator subtracts one value from another.</p>
+<p>Here is an example and result:</p>
+<pre class="prettyprint" lang-java>System.out.println(number1-number2);</pre>
+<img src="Images/operators8.png"><br><br>
+
+
+<ul>
+<li><strong>++</strong></li>
+</ul>
+<p>This <strong>++</strong> operator increments a value by 1.</p>
+<p>Here is an example and result:</p>
+<pre class="prettyprint" lang-java>System.out.println(++number1);</pre>
+<img src="Images/operators9.png"><br><br>
+
+<ul>
+<li><strong>--</strong></li>
+</ul>
+<p>This<strong>&nbsp;--</strong> operator decrements a value by 1.</p>
+<p>Here is an example and result:</p>
+<pre class="prettyprint" lang-java>System.out.println(--number1);</pre>
+<img src="Images/operators10.png"><br><br>
+
+<ul>
+<li><strong>/</strong></li>
+</ul>
+<p>This<strong> /</strong> operator divides a value by another.</p>
+<p>Here is an example and result:</p>
+<pre class="prettyprint" lang-java>System.out.println(number1/number2);</pre>
+<img src="Images/operators11.png"><br><br>
+
+<ul>
+<li><strong>*</strong></li>
+</ul>
+<p>This <strong>*</strong> operator multiplies two values with each other.</p>
+<p>Here is an example and result:</p>
+<pre class="prettyprint" lang-java>System.out.println(number1*number2);</pre>
+<img src="Images/operators12.png"><br><br>
+
+<br><br><h3 class="text-center">3.3 Relational Operators</h3><br>
+
+<p>These operators are used to make comparisons between different values.</p>
+<ul>
+<li><strong>!=</strong></li>
+</ul>
+<p>This operator will check if a value is not equal to another.</p>
+<p>Here is an example and result:</p>
+<p>&nbsp;</p>
+<pre class="prettyprint" lang-java>int number1=6;
+int number2=3;
+
+if(number1!=number2){
+	System.out.println("True");
+}else{
+	System.out.println("False");
+}</pre>
+<img src="Images/operators13.png"><br><br>
+
+
+<ul>
+<li><strong>==</strong></li>
+</ul>
+<p>This operator will check if two values are equal to each other.</p>
+<p>Here is an example and result:</p>
+<p>&nbsp;</p>
+<pre class="prettyprint" lang-java>if(number1==number2)</pre>
+<img src="Images/operators14.png"><br><br>
+
+
+<ul>
+<li><strong>&gt;&nbsp;</strong></li>
+</ul>
+<p>This operator will check if one value is greater than the other.</p>
+<p>Here is an example and result:</p>
+<p>&nbsp;</p>
+<pre class="prettyprint" lang-java>if(number1>number2)</pre>
+<img src="Images/operators15.png"><br><br>
+
+
+<ul>
+<li><strong>&lt;&nbsp;</strong></li>
+</ul>
+<p>This operator will check if one value is smaller than the other.</p>
+<p>Here is an example and result:</p>
+<p>&nbsp;</p>
+<pre class="prettyprint" lang-java>if(number1&lt;number2)</pre>
+<img src="Images/operators16.png"><br><br>
+
+
+<ul>
+<li><strong>&gt;=</strong></li>
+</ul>
+<p>This operator will check if one value is greater than or equal to another.</p>
+<p>Here is an example and result:</p>
+<p><strong>&nbsp;</strong></p>
+<pre class="prettyprint" lang-java>if(number1>=number2)</pre>
+<img src="Images/operators17.png"><br><br>
+
+
+<ul>
+<li><strong>&lt;=</strong></li>
+</ul>
+<p>This operator will check if one value is smaller than or equal to another.</p>
+<p>Here is an example and result:</p>
+<pre class="prettyprint" lang-java>if(number1&lt;=number2)</pre>
+<img src="Images/operators18.png"><br><br>
+
+<br><br><h3 class="text-center">3.4 Assignment Operators</h3><br>
+
+
+<p>Assignment operators involve changing a value in a variable.</p>
+<ul>
+<li><b>=</b></li>
+</ul>
+<p>This will change the value of one variable into the value of another</p>
+<p>Here is an example and result:</p>
+<pre class="prettyprint" lang-java>int number1=6;
+int number2=3;
+
+number1=number2;
+System.out.println(number1);</pre>
+<img src="Images/operators19.png"><br><br>
+
+<ul>
+<li><b>+=</b></li>
+</ul>
+<p>This will add a value from one variable to the value of another variable and ALSO assigns this new value as the value stored in the variable.</p>
+
+<pre class="prettyprint" lang-java>
+number1+=number2;</pre>
+<img src="Images/operators20.png"><br><br>
+
+<ul>
+<li><b>-=</b></li>
+</ul>
+<p>This will subtract a value from one variable by the value of another variable and ALSO assigns this new value as the value stored in the variable.</p>
+<pre class="prettyprint" lang-java>
+number1-=number2;</pre>
+<img src="Images/operators21.png"><br><br>
+
+
+<ul>
+<li><b>/=</b></li>
+</ul>
+<p>This will divide a value from one variable by the value of another variable and ALSO assigns this new value as the value stored in the variable.</p>
+<pre class="prettyprint" lang-java>
+number1/=number2;</pre>
+<img src="Images/operators22.png"><br><br>
+
+
+<ul>
+<li><b>*=</b></li>
+</ul>
+<p>This will multiply a value from one variable by the value of another variable and ALSO assigns this new value as the value stored in the variable.</p>
+<pre class="prettyprint" lang-java>
+number1*=number2;</pre>
+<img src="Images/operators23.png"><br><br>			
+			
+			
+			
+			<br><br><br>
+        </div>
+    </div>
+</div>
+</body>
+</html>

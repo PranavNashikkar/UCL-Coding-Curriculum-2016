@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Processing Physics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sons-of-obsidian"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">Processing Physics</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Basics of Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="intro.html">Introduction and Contents</a></li>
+                    <li><a href="syntax.html">Lesson 1 - Syntax</a></li>
+                    <li><a href="datatypes&variables.html">Lesson 2 - Data Types and Variables</a></li>
+                    <li><a href="operators.html">Lesson 3 - Operators</a></li>
+					<li><a href="arrays.html">Lesson 4 - Arrays</a></li>
+                    <li><a href="methods.html">Lesson 5 - Methods</a></li>
+					<li><a href="selection.html">Lesson 6 - Selection</a></li>
+                    <li><a href="iteration.html">Lesson 7 - Iteration</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Advanced Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="classes&objects.html">Lesson 1 - Classes and Objects</a></li>
+                    <li><a href="inheritance&scope.html">Lesson 2 - Inheritance and Scope</a></li>
+                    <li><a href="interfaces&methodsignatures.html">Lesson 3 - Interfaces and Method Signatures</a></li>
+                </ul>
+            </li>
+            <li><a href="physics.html">The Physics</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Simulation<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="input-draw.html">Task 1 - Input and Drawing</a></li>
+                    <li><a href="gravity-velocity.html">Task 2 - Gravity and Velocity</a></li>
+                    <li><a href="collisions.html">Task 3 - Collisions</a></li>
+                    <li><a href="friction.html">Task 4 - Friction</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="container-fluid">
+            <h3>Fixed Navbar</h3>
+			
+			<h1 class="text-center">1. Syntax</h1>
+            <h3 class="text-center">1.1 Importance of Syntax</h3><br><br>
+			<p>When we look at Java source code we have to follow a <b>set of 
+			rules</b> in order for the code to be identified as Java and not 
+			another programming language. Moreover, these rules allow a 
+			<b>compiler</b> to convert this <b>source code</b> into a working program. 
+			A compiler is a program that processes source code and turns 
+			into actual <b>machine code</b> that the computer understands and can run. 
+			If these rules are not followed, it will lead to error known as a 
+			<b>Syntax error</b>.
+			</p><br>
+			
+			<h3 class="text-center">1.2 Java Syntax</h3><br>
+			<p>Below is some sample Java Source code that starts with 
+			identifying the fundamental set of rules required to code in Java.</p>
+			
+			<pre class="prettyprint" lang-java>
+public class FirstProgram{
+	public static void main(String args[]){
+		printHelloWorld();
+	}
+	
+	public static void printHelloWorld(){
+		System.out.println("Hello World!");
+	}
+}</pre>
+			
+			<p> Here are the main rules to consider when coding in Java:
+			<ul>
+			<li><p><strong>Class name</strong>: The <em>first</em> letter of the class name should conventionally be <em>upper case</em> and every <em>subsequent word&rsquo;s first letter</em> should also be uppercase. This convention is known as <em>Pascal Case</em>. The <em>class </em>acts as a <em>template </em>for an<em> object.</em> Don&rsquo;t worry if you do not know what this means, it will be covered&nbsp;in the <strong>Advanced Java section.</strong></p>
+			<li><p><strong>Method name</strong>: A method acts as the <em>behaviour</em> of the class and is where all actions are executed along with any <em>logical operations or data manipulation</em>. The name of the method should conventionally start with a<em> lower case</em> letter and the <em>subsequent word&rsquo;s first letters</em> should be upper case. This convention is known as <em>Camel Case. </em>An example of a method above would be <em>printHelloWorld().</em></p>
+			<li><p><strong>Curly braces</strong>: The beginning of a class and method should be started with the <em>opening curly brace</em> <strong>{</strong> and the end of the class or method should be <em>terminated</em> with a <em>closing curly brace</em> <strong>}</strong>. This helps the compiler identify what method or class each block of code belongs to.</p>
+			<li><p><strong>Statement terminal</strong>: Each line that is not accompanied with a <em>curly</em> <em>brace</em> at the <em>end</em> must be terminated with a <em>semi colon</em> <strong>;</strong> as part of Java syntax rules. Otherwise it will produce a <em>compilation error</em> which is when the code does not compile due to an error at compilation.</p>
+			<li><p><strong>Identifiers</strong>: These are the <em>names</em> given to variables, classes and methods, such as the method&nbsp;<em>printHelloWorld</em> in the program above. They must begin with a <em>letter</em>, the<strong> <em>$</em></strong> character or the <strong>_ </strong>character. Also they cannot be a Java <em>keyword</em>.</p>
+			<li><p><strong>Case Sensitivity</strong>: This means that <em>printHelloWorld()</em> and <em>PrintHelloWorld()</em> will result in different outputs in the program above. The latter will produce an error because there is no method called <em>PrintHelloWorld().&nbsp;</em>This is because the compiler will look for the&nbsp;<em>exact</em> equivalent in terms of a variable or method name so it is important to remember to check this to avoid errors.</p>
+			</ul><br><br>
+			
+			To demonstrate the importance of syntax, below are examples of compilation errors that occur when curly braces are missing or statement terminal semi-colons are missing:
+			
+			<br><br><pre class="prettyprint" lang-java>
+public class FirstProgram{
+	public static void main(String args[]){
+		printHelloWorld();
+	//missing curly brace here
+	
+	public static void printHelloWorld(){
+		System.out.println("Hello World!");
+	}
+}</pre>
+<p><b>Error:</b></p>
+<img src="Images/syntaxerror1.png">		
+<br><br><pre class="prettyprint" lang-java>
+public class FirstProgram{
+	public static void main(String args[]){
+		printHelloWorld();
+	//missing curly brace here
+	
+	public static void printHelloWorld(){
+		System.out.println("Hello World!") //missing semi colon here
+	}
+}</pre>	
+<p><b>Error:</b></p>
+<img src="Images/syntaxerror2.png">
+	
+	
+<br><br><p>Here is the <i>correct</i> output when the source code compiles successfully without any compilation errors due to valid syntax:</p>
+
+<img src="Images/syntaxcorrect.png">
+
+	</p>
+			
+			
+			
+<br><br><br>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Processing Physics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sons-of-obsidian"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">Processing Physics</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Basics of Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="intro.html">Introduction and Contents</a></li>
+                    <li><a href="syntax.html">Lesson 1 - Syntax</a></li>
+                    <li><a href="datatypes&variables.html">Lesson 2 - Data Types and Variables</a></li>
+                    <li><a href="operators.html">Lesson 3 - Operators</a></li>
+					<li><a href="arrays.html">Lesson 4 - Arrays</a></li>
+                    <li><a href="methods.html">Lesson 5 - Methods</a></li>
+					<li><a href="selection.html">Lesson 6 - Selection</a></li>
+                    <li><a href="iteration.html">Lesson 7 - Iteration</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Advanced Java<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="classes&objects.html">Lesson 1 - Classes and Objects</a></li>
+                    <li><a href="inheritance&scope.html">Lesson 2 - Inheritance and Scope</a></li>
+                    <li><a href="interfaces&methodsignatures.html">Lesson 3 - Interfaces and Method Signatures</a></li>
+                </ul>
+            </li>
+            <li><a href="physics.html">The Physics</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Simulation<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="input-draw.html">Task 1 - Input and Drawing</a></li>
+                    <li><a href="gravity-velocity.html">Task 2 - Gravity and Velocity</a></li>
+                    <li><a href="collisions.html">Task 3 - Collisions</a></li>
+                    <li><a href="friction.html">Task 4 - Friction</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="container-fluid">
+            <h3>Fixed Navbar</h3>
+				<h1 class="text-center">4. Arrays</h1><br><br>
+			<p>An <strong>Array</strong> is a <em>data structure</em> which contains a <em>fixed</em> or <em>static</em> number of <em>elements</em> of <em>identical</em> data type.</p>
+<br><h3 class="text-center">4.1 Declaration, Instantiation, and Indexing</h3>
+			<p><strong>Declaration</strong></p>
+			<pre class="prettyprint" lang-java>String[] strArray;
+int[] intArray;</pre>
+			<p><strong>Instantiation</strong></p>
+			<pre class="prettyprint" lang-java>String[] strArray=new String[10];
+int[] intArray=new int[50];</pre><br>
+			<pre class="prettyprint" lang-java>int arrayLength=10;
+String[] strArray=new String[arrayLength];</pre>
+			
+			<p>This is the common way of creating an array. It makes use of the Java keyword <em>new</em> and identifies the number of elements being allocated to this array in the<em> square brackets</em>. It can use a <em>fixed</em> value 10 for example, or another integer variable and the value stored in it.</p>
+<p>However, Java arrays can also be created with <em>literals</em> too.</p>
+	<pre class="prettyprint" lang-java>String[] strArray={"Hello", "World", "!"};;
+int[] intArray={2,5,7,3,4,6,45};</pre>
+
+<p>In this example each array is defined not with the number of elements but rather the elements themselves. The String array will contain 3 elements and the integer array will contain 6 elements.</p>
+			<p><strong>Indexing</strong></p>
+<p>In Java, each array starts with the element 0 so if an array is instantiated with 5 elements. The element indexes in the array would be:</p>
+<table>
+<tbody>
+<tr>
+<td width="125">
+<p>Element</p>
+</td>
+<td width="125">
+<p>1</p>
+</td>
+<td width="125">
+<p>2</p>
+</td>
+<td width="125">
+<p>3</p>
+</td>
+<td width="125">
+<p>4</p>
+</td>
+<td width="125">
+<p>5</p>
+</td>
+</tr>
+<tr>
+<td width="125">
+<p>Index</p>
+</td>
+<td width="125">
+<p>0</p>
+</td>
+<td width="125">
+<p>1</p>
+</td>
+<td width="125">
+<p>2</p>
+</td>
+<td width="125">
+<p>3</p>
+</td>
+<td width="125">
+<p>4</p>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<pre class="prettyprint" lang-java>int[] intArray={2,5,7,3,7};
+System.out.println("The first element is "+intArray[0]);
+System.out.println("The fifth element is "+intArray[4]);</pre>
+	
+	<img src="Images/array1.png">
+
+<p>Above is an example of printing the elements of the array by using the index reference in the square brackets.</p>
+<br><br><h3 class="text-center">4.2 Useful Array Object Methods</h3><br>
+<p>Since arrays are objects they have useful methods that allow you to do cool things with them. Here is one:</p>
+<ul>
+<li>length() &ndash; This method allows you to calculate the length of the array, meaning the number of elements it has. The reason why this is useful is because you might have used another integer variable to determine the array&rsquo;s size. So since the integer variable could change during runtime, you might need to find the length of the array. Below is an example of it in use.</li>
+</ul>
+<pre class="prettyprint" lang-java>int arrayLength=16;
+String[] strArray=new String[arrayLength];
+System.out.println("The length of this array is "+strArray.length);</pre>
+
+<img src="Images/array2.png">
+			<br><br><br>
+        </div>
+    </div>
+</div>
+</body>
+</html>
